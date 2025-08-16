@@ -1,0 +1,74 @@
+---
+---
+<section class="about-section">
+    <div class="about-image">
+        <img src="m.jpg" alt="Murilo Mognon - Foto de Perfil" />
+    </div>
+    <div class="about-content">
+        <h2>Sobre Mim</h2>
+        <p>Sou **Murilo Moreira Mognon**, um apaixonado por tecnologia e desenvolvimento web. Minha jornada profissional começou com um forte interesse em automação e programação, o que me levou a explorar o mundo do desenvolvimento de software.</p>
+        <p>Atualmente, estou me aprimorando para me tornar um **desenvolvedor full stack**, com foco nas stacks de **Java Spring Boot**, **Node.js**, **React** e **Python**. Acredito na importância de construir soluções robustas e eficientes, e estou sempre em busca de novos conhecimentos e desafios para aprimorar minhas habilidades e contribuir para projetos inovadores.</p>
+    </div>
+</section>
+
+<style>
+    .about-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        background-color: #161b22; /* Fundo escuro */
+        color: #c9d1d9; /* Cor do texto claro */
+        gap: 4rem;
+    }
+
+    .about-image {
+        flex-shrink: 0;
+    }
+
+    .about-image img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%; /* Borda arredondada para a foto */
+        object-fit: cover;
+        border: 4px solid #58a6ff;
+        box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+    }
+
+    .about-content {
+        max-width: 600px;
+    }
+
+    .about-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #58a6ff;
+        text-align: left;
+    }
+
+    .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+
+    /* Media query para telas menores */
+    @media (max-width: 992px) {
+        .about-section {
+            flex-direction: column;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .about-content h2,
+        .about-content p {
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 200px;
+            height: 200px;
+        }
+    }
+</style>
