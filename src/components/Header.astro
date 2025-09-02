@@ -8,23 +8,32 @@
 
         <ul class="nav-links">
             <li><a href="#intro">Intro</a></li>
-            <li><a href="#sobre">Sobre</a></li>
             <li><a href="#habilidades">Skills</a></li>
             <li><a href="#">Laboratório</a></li>
             <li><a href="#">Contato</a></li>
+            
+            <li class="social-icon">
+                <a href="https://github.com/mognon-murilo" target="_blank" aria-label="Github">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0.297C5.372 0.297 0 5.669 0 12.316c0 5.308 3.438 9.805 8.205 11.385.6.11.82-.26.82-.577v-2.003c-3.336.726-4.041-1.611-4.041-1.611-.546-1.387-1.332-1.758-1.332-1.758-1.09-.747.08-.732.08-.732 1.203.085 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.491.998.109-.775.419-1.305.762-1.605-2.667-.305-5.464-1.334-5.464-5.945 0-1.312.467-2.385 1.235-3.228-.114-.305-.536-1.523.109-3.189 0 0 1.006-.323 3.301 1.232.956-.265 1.97-.398 2.983-.403 1.013.005 2.027.138 2.983.403 2.295-1.555 3.301-1.232 3.301-1.232.65.65.228 1.884.109 3.189.768.843 1.235 1.916 1.235 3.228 0 4.61-2.802 5.638-5.474 5.938.43.37.818 1.127.818 2.274v3.354c0 .317.22.687.82.577C20.562 22.121 24 17.624 24 12.316 24 5.669 18.628 0.297 12 0.297z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </li>
+            <li class="social-icon">
+                <a href="https://linkedin.com/in/mognon-murilo" target="_blank" aria-label="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.5 2H3.5C2.671 2 2 2.671 2 3.5v17C2 21.329 2.671 22 3.5 22h17c.829 0 1.5-.671 1.5-1.5v-17C22 2.671 21.329 2 20.5 2zM8 19.5H5V10.5h3v9zm-1.5-10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2zm13 10H11V10.5h3v1.5h.063c.44-.757 1.59-1.563 3.437-1.563 3.65 0 4.35 2.375 4.35 5.438V19.5h-3v-5.25c0-1.25-.094-2.25-1.813-2.25-1.813 0-2.031 1.406-2.031 2.75V19.5z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
 
 <style>
-    .nav-container a {
-        font-size: 1.5rem;
-        margin: 0.5rem 0;
-        
-    }
     .main-header {
         background-color: #0d1117;
-        position: fixed; /* Fixa a barra no topo */
+        position: fixed;
         width: 100%;
         top: 0;
         left: 0;
@@ -60,6 +69,7 @@
     .nav-links {
         list-style: none;
         display: flex;
+        align-items: center; /* Alinha os ícones verticalmente com os links de texto */
         gap: 2rem;
         margin: 0;
         padding: 0;
@@ -74,5 +84,16 @@
 
     .nav-links a:hover {
         color: #58a6ff;
+    }
+
+    .social-icon svg {
+        fill: currentColor; /* Usa a cor do texto do link para o ícone SVG */
+        width: 20px;
+        height: 20px;
+        transition: fill 0.3s ease;
+    }
+    
+    .social-icon a:hover svg {
+        fill: #58a6ff; /* Muda a cor do ícone no hover */
     }
 </style>
