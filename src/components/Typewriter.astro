@@ -1,0 +1,135 @@
+---
+const { 
+    text = '', 
+    staticText = '', 
+    dynamicTexts = [], 
+    delay = 100, 
+    loop = false,
+    cursor = true
+} = Astro.props;
+
+const isLooped = loop && dynamicTexts.length > 0;
+const containerData = isLooped 
+    ? {
+        'data-static-text': staticText,
+        'data-dynamic-texts': JSON.stringify(dynamicTexts)
+    }
+    : {
+        'data-text': text,
+        'data-delay': delay,
+        'data-cursor': cursor
+    };
+---
+
+{isLooped ? (
+    <div class="typewriter-container" {...containerData}>
+        <span class="static-text">{staticText} </span>
+        <span class="dynamic-text"></span>
+        <span class="typewriter-cursor">|</span>
+    </div>
+) : (
+    <span class="typewriter-container" {...containerData}></span>
+)}
+
+<script>
+    (() => {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.typewriter-container').forEach(container => {
+                const isLooped = !!container.dataset.dynamicTexts;
+
+                if (isLooped) {
+                    // Lógica para o efeito de loop
+                    const dynamicTextSpan = container.querySelector('.dynamic-text');
+                    const dynamicTexts = JSON.parse(container.dataset.dynamicTexts);
+                    const cursor = container.querySelector('.typewriter-cursor');
+                    
+                    let textIndex = 0;
+                    let charIndex = 0;
+                    let isDeleting = false;
+
+                    function type() {
+                        const currentText = dynamicTexts[textIndex];
+                        if (isDeleting) {
+                            dynamicTextSpan.textContent = currentText.substring(0, charIndex--);
+                        } else {
+                            dynamicTextSpan.textContent = currentText.substring(0, charIndex++);
+                        }
+                    }
+
+                    function loopText() {
+                        const currentText = dynamicTexts[textIndex];
+                        const typingSpeed = isDeleting ? 50 : 100;
+
+                        if (!isDeleting && charIndex === currentText.length + 1) {
+                            isDeleting = true;
+                            setTimeout(loopText, 1500); 
+                        } else if (isDeleting && charIndex === 0) {
+                            isDeleting = false;
+                            textIndex = (textIndex + 1) % dynamicTexts.length;
+                            setTimeout(loopText, 500);
+                        } else {
+                            setTimeout(() => {
+                                type();
+                                loopText();
+                            }, typingSpeed);
+                        }
+                    }
+
+                    loopText();
+                    if (cursor) {
+                        setInterval(() => {
+                            cursor.style.opacity = (cursor.style.opacity === '0.0' ? '1.0' : '0.0');
+                        }, 500);
+                    }
+
+                } else {
+                    // Lógica para o efeito de digitação única
+                    const text = container.dataset.text;
+                    const delay = parseInt(container.dataset.delay || '100');
+
+                    let i = 0;
+                    
+                    function typeWriter() {
+                        if (i < text.length) {
+                            container.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, delay);
+                        }
+                    }
+
+                    container.textContent = '';
+                    typeWriter();
+                    const cursorSpan = document.createElement('span');
+                    cursorSpan.classList.add('typewriter-cursor');
+                    container.appendChild(cursorSpan);
+                }
+            });
+        });
+    })();
+</script>
+
+<style>
+    .typewriter-cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1em;
+        background-color: #c9d1d9;
+        animation: blink-caret 0.75s step-end infinite;
+        vertical-align: middle;
+        margin-left: 2px;
+    }
+
+    @keyframes blink-caret {
+        from, to { background-color: transparent; }
+        50% { background-color: #c9d1d9; }
+    }
+
+    .static-text {
+        font-weight: bold;
+    }
+
+    .dynamic-text {
+        font-weight: bold;
+        color: #58a6ff;
+    }
+</style>

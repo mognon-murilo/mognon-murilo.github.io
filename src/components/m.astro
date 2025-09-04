@@ -1,12 +1,20 @@
+
 ---
-// Importe componentes ou faça lógica aqui, se necessário.
-// Por enquanto, não precisa de nada no frontmatter.
+import Typewriter from './Typewriter.astro'; 
+
 ---
-<section class="hero-section">
+
+
+<section class="hero-section" id="Intro">
     <div class="intro-content">
         <p class="role-text">DESENVOLVEDOR WEB</p>
-        <h1>Murilo Moreira Mognon</h1>
-        <p class="description-text">Sou um desenvolvedor web e futuro desenvolvedor full stack, focado em Node.js, React e Python.</p>
+ <h1>
+            <Typewriter 
+                loop 
+                staticText="Olá, eu sou Murilo Moreira Mognon " 
+                dynamicTexts={["Desenvolvedor Web", "Programador"]} 
+            />
+        </h1>      <p class="description-text">Sou um desenvolvedor web e Estudante do 6.º - sexto semestre de Ciência da Computação na Universidade de Passo Fundo.</p>
         <a href="Currículo Murilo Mognon (3).pdf" class="download-button" download>
             BAIXAR CURRÍCULO
         </a>

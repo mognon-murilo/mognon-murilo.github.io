@@ -1,0 +1,272 @@
+---
+const skills = [
+    { name: "Java Spring Boot", percentage: 95, color: "#58a6ff" },
+    { name: "Node.js", percentage: 95, color: "#58a6ff" },
+    { name: "AWS Certified", percentage: 100, color: "#58a6ff" },
+    { name: "Lógica de Programação", percentage: 80, color: "#58a6ff" },
+    { name: "React", percentage: 90, color: "#58a6ff" },
+    { name: "Python", percentage: 85, color: "#58a6ff" },
+     { name: "C++", percentage: 85, color: "#58a6ff" },
+];
+---
+
+<section class="skills-carousel-section" id="habilidades">
+    <div class="skills-card-wrapper">
+        <div class="skills-header">
+            <h2>Skills</h2>
+            <p>Minhas habilidades técnicas que desenvolvo através de muito estudo e prática.</p>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-nav prev" aria-label="Habilidade anterior">&#8249;</button>
+            <div class="carousel-track-container">
+                <div class="carousel-track">
+                    {skills.map((skill) => (
+                        <div class="skill-card">
+                            <div class="progress-ring">
+                                <svg viewBox="0 0 36 36">
+                                    <path class="ring-bg"
+                                        d="M18 2.0845
+                                           a 15.9155 15.9155 0 0 1 0 31.831
+                                           a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="ring-fg"
+                                        d="M18 2.0845
+                                           a 15.9155 15.9155 0 0 1 0 31.831
+                                           a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        stroke-dasharray={`${skill.percentage}, 100`}
+                                        style={`stroke: ${skill.color};`} />
+                                </svg>
+                                <span class="percentage-text" style={`color: ${skill.color};`}>{skill.percentage}%</span>
+                            </div>
+                            <p class="skill-name">{skill.name}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <button class="carousel-nav next" aria-label="Próxima habilidade">&#8250;</button>
+        </div>
+    </div>
+</section>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselTrack = document.querySelector('.carousel-track');
+        const prevButton = document.querySelector('.carousel-nav.prev');
+        const nextButton = document.querySelector('.carousel-nav.next');
+        const skillCards = Array.from(document.querySelectorAll('.skill-card'));
+
+        if (!carouselTrack || !prevButton || !nextButton || skillCards.length === 0) {
+            console.error('Elementos do carrossel não encontrados.');
+            return;
+        }
+
+        let cardWidth = skillCards[0].offsetWidth + parseInt(getComputedStyle(carouselTrack).gap);
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carouselTrack.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === skillCards.length - 1;
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < skillCards.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        // Adiciona um listener para redimensionamento para ajustar a largura do card
+        window.addEventListener('resize', () => {
+            const newCardWidth = skillCards[0].offsetWidth + parseInt(getComputedStyle(carouselTrack).gap);
+            if (newCardWidth !== cardWidth) { // Somente recalcula se a largura do card mudou
+                cardWidth = newCardWidth;
+                updateCarousel();
+            }
+        });
+
+        updateCarousel(); // Inicializa o carrossel
+    });
+</script>
+
+<style>
+    .skills-carousel-section {
+        padding: 4rem 2rem;
+        background-color: #0d1117; /* Cor de fundo da página */
+        text-align: center;
+        color: #fff;
+    }
+
+    .skills-card-wrapper {
+        background-color: #161b22;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .skills-header h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #58a6ff;
+        margin-bottom: 0.5rem;
+    }
+
+    .skills-header p {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        color: #c9d1d9;
+    }
+
+    .carousel-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .carousel-nav {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        font-size: 2rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-nav.prev {
+        left: -40px;
+    }
+
+    .carousel-nav.next {
+        right: -40px;
+    }
+
+    .carousel-nav:hover:not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .carousel-nav:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .carousel-track-container {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        gap: 2rem;
+        padding: 1rem 0;
+    }
+
+    .skill-card {
+        flex-shrink: 0;
+        width: 250px;
+        background-color: #21262d;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .progress-ring {
+        position: relative;
+        width: 120px;
+        height: 120px;
+    }
+
+    .progress-ring svg {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+    }
+
+    .ring-bg,
+    .ring-fg {
+        fill: none;
+        stroke-width: 2;
+    }
+
+    .ring-bg {
+        stroke: #2e3034;
+    }
+
+    .ring-fg {
+        stroke: var(--skill-color, #58a6ff);
+        stroke-linecap: round;
+        transition: stroke-dasharray 0.5s ease;
+    }
+
+    .percentage-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--skill-color, #58a6ff);
+    }
+
+    .skill-name {
+        font-size: 1.1rem;
+        color: #c9d1d9;
+    }
+
+    /* Media queries para responsividade */
+    @media (max-width: 768px) {
+        .skills-card-wrapper {
+            padding: 1rem;
+        }
+        .carousel-container {
+            max-width: 300px;
+        }
+        .skill-card {
+            width: 280px;
+        }
+        .carousel-nav.prev {
+            left: -10px;
+        }
+        .carousel-nav.next {
+            right: -10px;
+        }
+        .skills-header h2 {
+            font-size: 2rem;
+        }
+        .skills-header p {
+            font-size: 1rem;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .carousel-container {
+            max-width: 600px;
+        }
+        .skill-card {
+            width: 280px;
+        }
+    }
+</style>

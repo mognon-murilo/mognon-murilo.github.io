@@ -1,16 +1,19 @@
 ---
+// src/components/Header.astro
+import Typewriter from './Typewriter.astro'; 
+
 ---
 <header class="main-header">
     <nav class="nav-container">
         <a href="#intro" class="logo">
-            &lt;<span>/</span>&gt; Murilo Moreira Mognon
+            &lt;<span>/</span>&gt; <Typewriter text="Murilo Moreira Mognon" delay={75} />
         </a>
 
         <ul class="nav-links">
-            <li><a href="#intro">Intro</a></li>
+            <li><a href="#Intro">Intro</a></li>
             <li><a href="#habilidades">Skills</a></li>
-            <li><a href="#">Laboratório</a></li>
-            <li><a href="#">Contato</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#contato">Contato</a></li>
             
             <li class="social-icon">
                 <a href="https://github.com/mognon-murilo" target="_blank" aria-label="Github">
@@ -69,7 +72,7 @@
     .nav-links {
         list-style: none;
         display: flex;
-        align-items: center; /* Alinha os ícones verticalmente com os links de texto */
+        align-items: center;
         gap: 2rem;
         margin: 0;
         padding: 0;
@@ -87,13 +90,13 @@
     }
 
     .social-icon svg {
-        fill: currentColor; /* Usa a cor do texto do link para o ícone SVG */
+        fill: currentColor;
         width: 20px;
         height: 20px;
         transition: fill 0.3s ease;
     }
     
     .social-icon a:hover svg {
-        fill: #58a6ff; /* Muda a cor do ícone no hover */
+        fill: #58a6ff;
     }
 </style>
